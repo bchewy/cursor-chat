@@ -1,13 +1,13 @@
 {
-  "name": "composer-boop",
-  "displayName": "Composer Boop",
-  "description": "VS Code extension to add feedback to Cursor composer",
-  "version": "0.0.4",
-  "publisher": "outrageouslyfrench",
+  "name": "cursor-chat-beep",
+  "displayName": "Cursor Chat Beep",
+  "description": "VS Code extension to add sound notifications to Cursor composer and chat",
+  "version": "1.0.1",
+  "publisher": "bchewy",
   "license": "MIT",
   "icon": "media/icon.png",
   "author": {
-    "name": "Joel Lanciaux"
+    "name": "Brian"
   },
   "repository": {
     "type": "git",
@@ -23,25 +23,40 @@
     "cursor",
     "sound",
     "notification",
-    "composer"
+    "composer",
+    "chat"
   ],
   "activationEvents": [
-    "onCustomEditor:composer-code-block-anysphere",
-    "onStartupFinished"
+    "*"
   ],
   "main": "./out/extension.js",
   "contributes": {
+    "commands": [
+      {
+        "command": "cursorChatBeep.testSound",
+        "title": "Test Beep Sound",
+        "category": "Cursor Chat"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "cursorChatBeep.testSound",
+        "key": "ctrl+shift+b",
+        "mac": "cmd+shift+b",
+        "when": "editorTextFocus"
+      }
+    ],
     "configuration": {
-      "title": "Composer Boop",
+      "title": "Cursor Chat Beep",
       "properties": {
-        "composerBoop.delayMs": {
+        "cursorChatBeep.delayMs": {
           "type": "number",
           "default": 3000,
           "minimum": 100,
           "maximum": 10000,
           "description": "Delay in milliseconds before playing the sound after typing stops"
         },
-        "composerBoop.soundFile": {
+        "cursorChatBeep.soundFile": {
           "type": "string",
           "default": "notification-bloop.wav",
           "enum": [
@@ -52,17 +67,17 @@
           ],
           "description": "Sound file to play (from the included sounds)"
         },
-        "composerBoop.enabled": {
+        "cursorChatBeep.enabled": {
           "type": "boolean",
           "default": true,
-          "description": "Enable or disable the boop sound"
+          "description": "Enable or disable the beep sound"
         },
-        "composerBoop.volume": {
+        "cursorChatBeep.volume": {
           "type": "number",
           "default": 1,
           "minimum": 0,
           "maximum": 1,
-          "description": "Volume of the boop sound (0.0 to 1.0)"
+          "description": "Volume of the beep sound (0.0 to 1.0)"
         }
       }
     }
